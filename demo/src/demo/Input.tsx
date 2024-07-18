@@ -12,31 +12,31 @@ export default () => {
 
   return (
     <DemoPage>
-      <DemoSection title="基础用法">
-        <Input value={value1} onChange={setValue1} placeholder="请输入..." />
+      <DemoSection title="Basic Usage">
+        <Input value={value1} onChange={setValue1} placeholder="Please enter..." />
       </DemoSection>
-      <DemoSection title="多行输入">
-        <Input rows={3} value={value2} onChange={setValue2} placeholder="请输入..." />
+      <DemoSection title="Multi-line Input">
+        <Input rows={3} value={value2} onChange={setValue2} placeholder="Please enter..." />
       </DemoSection>
-      <DemoSection title="高度自适应">
-        <Input autoSize value={value3} onChange={setValue3} placeholder="请输入..." />
+      <DemoSection title="Auto Height">
+        <Input autoSize value={value3} onChange={setValue3} placeholder="Please enter..." />
       </DemoSection>
-      <DemoSection title="限制字数">
-        <Input maxLength={20} value={value4} onChange={setValue4} placeholder="请输入..." />
+      <DemoSection title="Character Limit">
+        <Input maxLength={20} value={value4} onChange={setValue4} placeholder="Please enter..." />
       </DemoSection>
-      <DemoSection title="限制字数（不显示）">
+      <DemoSection title="Character Limit (Not Displayed)">
         <Input
           maxLength={10}
           value={value5}
           onChange={setValue5}
-          placeholder="请输入..."
+          placeholder="Search..."
           showCount={false}
         />
       </DemoSection>
-      <DemoSection title="显示字数">
-        <Input value={value6} onChange={setValue6} placeholder="请输入..." showCount />
+      <DemoSection title="Show Character Count">
+        <Input value={value6} onChange={setValue6} placeholder="Please enter..." showCount />
       </DemoSection>
-      <DemoSection title="变体">
+      <DemoSection title="Variants">
         <Input placeholder="Default (Outline)" />
         <br />
         <Input placeholder="Outline" variant="outline" />

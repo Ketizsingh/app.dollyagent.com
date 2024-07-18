@@ -117,7 +117,7 @@ export default () => (
           unit="kg"
           elderMode
           action={{
-            label: '发送',
+            label: '详情', // english: 'detail'
             color: 'primary',
             onClick(e) {
               console.log(e);

@@ -48,7 +48,7 @@ export const PullToRefresh = React.forwardRef<PullToRefreshHandle, PullToRefresh
       loadingDistance = 30,
       maxDistance,
       distanceRatio = 2,
-      loadMoreText = '点击加载更多',
+      loadMoreText = 'Load more',
       children,
       onScroll,
       onRefresh,

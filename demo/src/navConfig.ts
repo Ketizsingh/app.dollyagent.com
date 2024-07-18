@@ -1,8 +1,8 @@
 export const navConfig = [
   {
-    title: '对话组件',
+    title: 'Dolly Agent',
     list: [
-      { name: '对话容器', code: 'chat' },
+      { name: 'Chat', code: 'chat' },
       { name: '气泡', code: 'bubble' },
       { name: '卡片', code: 'card' },
       { name: '文件卡片', code: 'file-card' },
