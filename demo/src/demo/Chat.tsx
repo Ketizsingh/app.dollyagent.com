@@ -6,7 +6,7 @@ import Chat, {
   useMessages,
   QuickReplyItemProps,
   useQuickReplies,
-  Card,
+  // Card,
   CardMedia,
   CardTitle,
   CardText,
@@ -19,173 +19,60 @@ import Chat, {
   ScrollView,
   ToolbarItemProps,
   RateActions,
-  Typing,
 } from '../../../src';
-import { DemoPage, DemoSection } from '../components';
 
 import OrderSelector from './OrdderSelector';
 
-
-
-
 type MessageWithoutId = Omit<MessageProps, '_id'>;
 
-
 const initialMessages: MessageWithoutId[] = [
-  // {
-  //   type: 'system',
-  //   content: { text: 'Chat started at ' + new Date().toLocaleTimeString() },
-  // },
-  // {
-  //   type: 'text',
-  //   content: { text: 'Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-  //   user: {
-  //     avatar: 'https://avatars.githubusercontent.com/u/33565557?v=4',
-  //     name: 'Dolly Agent',
-  //   },
-  //   createdAt: Date.now(),
-  //   hasTime: true,
-  // },
-  // {
-  //   type: 'text',
-  //   content: { text: 'Hello~' },
-  //   user: {
-  //     avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s',
-  //     name: 'You',
-  //   },
-  //   createdAt: Date.now(),
-  //   hasTime: true,
-  //   position: 'right',
-  // },
   {
-    type: 'guess-you',
-  },
-  // {
-  //   type: 'skill-cards',
-  // },
-  // {
-  //   type: 'text',
-  //   content: { text: 'Xiaomi, I want to check my logistics information' },
-  //   position: 'right',
-  //   user: { avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s' },
-  // },
-  // {
-  //   type: 'image',
-  //   content: {
-  //     picUrl: '//img.alicdn.com/tfs/TB1p_nirYr1gK0jSZR0XXbP8XXa-300-300.png',
-  //   },
-  // },
-  {
-    type: 'system',
-    content: {
-      text: 'Due to inactivity or leaving Xiaomi (leaving the page, locking the screen, etc.), this service has automatically ended.',
+    type: 'text',
+    content: { text: 'Hi! What would you like to know about our products today?' },
+    user: {
+      avatar: 'https://avatars.githubusercontent.com/u/33565557?v=4',
+      name: 'Dolly Assistant',
     },
+    createdAt: Date.now(),
+    hasTime: true,
   },
-  // {
-  //   type: 'image-text-button',
-  //   content: {},
-  // },
 ];
-
-
-// const defaultQuickReplies = [
-//   {
-//     icon: 'shopping-bag',
-//     name: 'Order Inquiry (Highlighted)',
-//     code: 'orderSelector',
-//     isHighlight: true,
-//   },
-//   {
-//     icon: 'shopping-bag',
-//     name: 'How to Apply for a Refund (Highlighted)',
-//     code: 'orderSelector',
-//     isHighlight: true,
-//   },
-//   {
-//     icon: 'message',
-//     name: 'Contact Human Service (Highlighted + New)',
-//     code: 'q1',
-//     isNew: true,
-//     isHighlight: true,
-//   },
-//   {
-//     name: 'Quality Issues (New)',
-//     code: 'q3',
-//     isNew: true,
-//   },
-//   {
-//     name: 'Seller Copywriting',
-//     code: 'q4',
-//   },
-//   {
-//     name: 'Top 5 Quick Phrases',
-//     code: 'q5',
-//   },
-//   {
-//     name: 'Bottom 6 Quick Phrases',
-//     code: 'q6',
-//   },
-// ];
-
-
 
 const defaultQuickReplies = [
   {
-    icon: 'shopping-bag',
-    name: 'Current Deals on Veggies',
-    code: 'dealSelector',
+    icon: 'info-circle',
+    name: 'What’s on sale today?',
+    code: 'saleToday',
+    isHighlight: true,
   },
   {
-    icon: 'shopping-bag',
-    name: 'New Veggie Promotions',
-    code: 'promoSelector',
+    icon: 'leaf',
+    name: 'What fresh veggies do you have?',
+    code: 'freshVeggies',
   },
   {
-    icon: 'message',
-    name: 'Top-Rated Vegetables (New)',
-    code: 'ratingSelector',
-    isNew: true,
+    icon: 'clock',
+    name: 'What’s your store’s opening hours?',
+    code: 'storeHours',
   },
   {
-    name: 'Available Veggies Tomorrow (New)',
-    code: 'availabilitySelector',
-    isNew: true,
+    icon: 'map-marker',
+    name: 'Where is your store located?',
+    code: 'storeLocation',
   },
   {
-    name: 'Seasonal Veggies on Sale',
-    code: 'seasonalSelector',
-  },
-  {
-    name: 'Veggie Variety Packs',
-    code: 'varietySelector',
-  },
-  {
-    name: 'Best-Selling Veggies Prices',
-    code: 'priceSelector',
-  },
-  {
-    name: 'Recipe Suggestions with Veggies',
-    code: 'recipeSelector',
-  },
-  {
-    name: 'Bulk Discount on Veggies',
-    code: 'bulkSelector',
-  },
-  {
-    name: 'Coupons for Veggie Purchases',
-    code: 'couponSelector',
+    icon: 'percent',
+    name: 'Any promotions on fruits?',
+    code: 'fruitPromotions',
   },
 ];
 
-
-
-
 const skillList = [
-  { title: 'Top-up', desc: 'Smart Top-up' },
-  { title: 'Review Management', desc: 'My Reviews' },
-  { title: 'Contact Seller', desc: 'Fast Contact' },
-  { title: 'Red Packet Coupons', desc: 'Use Discounts' },
-  { title: 'Change Address', desc: 'Update Address' },
+  { title: '话费充值', desc: '智能充值智能充值' },
+  { title: '评价管理', desc: '我的评价' },
+  { title: '联系商家', desc: '急速联系' },
+  { title: '红包卡券', desc: '使用优惠' },
+  { title: '修改地址', desc: '修改地址' },
 ];
 
 
@@ -194,22 +81,22 @@ const toolbar: ToolbarItemProps[] = [
   {
     type: 'smile',
     icon: 'smile',
-    title: 'Emoji',
+    title: '表情',
   },
   {
     type: 'orderSelector',
     icon: 'shopping-bag',
-    title: 'Products',
+    title: '宝贝',
   },
   {
     type: 'image',
     icon: 'image',
-    title: 'Image',
+    title: '图片',
   },
   {
     type: 'camera',
     icon: 'camera',
-    title: 'Take Photo',
+    title: '拍照',
   },
   {
     type: 'photo',
@@ -219,126 +106,27 @@ const toolbar: ToolbarItemProps[] = [
 ];
 
 
-//create a function for chat (that fetches the messages from the server)
+// Card component for displaying cards (for product details)
+const Card = ({ content }: any) => (
+  <div className="card">
+    <h3>{content.title}</h3>
+    <p>{content.text}</p>
+    {content.media && content.media.image && (
+      <img src={content.media.image} alt="product" style={{ maxWidth: '100px' }} />
+    )}
+    {content.actions &&
+      content.actions.map((action: any, index: number) => (
+        <button key={index} style={{ marginRight: '10px' }}>
+          {action.text}
+        </button>
+      ))}
+  </div>
+);
 
-
-// async function fetchIntent(question: string): Promise<string> {
-//   const myHeaders = new Headers();
-//   myHeaders.append("Content-Type", "application/json");
-//   myHeaders.append("Origin", "http://127.0.0.1:5173");
-//   myHeaders.append("Referer", "http://127.0.0.1:5173/");
-//   myHeaders.append("API-Key", "hT3vB6sJmZpQ8dR1nX9yA0wCf4lV7kW2");
-
-//   const raw = JSON.stringify({
-//     store_id: "Example Store -28282",
-//     categories: [
-//       "Dairy",
-//       "Bakery",
-//       "Produce"
-//     ],
-//     question: question
-//   });
-
-//   const requestOptions: RequestInit = {
-//     method: 'POST',
-//     headers: myHeaders,
-//     body: raw,
-//     redirect: 'follow',
-//     mode: 'cors',
-
-//   };
-
-//   try {
-//     const response = await fetch("http://engine.dollyassistant.com/search_intent", requestOptions);
-//     const result = await response.json();
-//     return result;
-//   } catch (error) {
-//     console.error('Error:', error);
-//     throw new Error('Failed to fetch intent');
-//   }
-// }
-
-
-async function fetchIntent(question: string): Promise<string> {
-  
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("API-Key", "hT3vB6sJmZpQ8dR1nX9yA0wCf4lV7kW2");
-
-
-  const requestOptions: RequestInit = {
-    method: 'POST',
-    headers: myHeaders,
-    body: JSON.stringify({
-      store_id: "Example Store -28282",
-      categories: [
-        "Dairy",
-        "Bakery",
-        "Produce"
-      ],
-      question: question
-    }),
-    redirect: 'follow',
-    // mode: 'cors',
-  };
-
-
-  
-  try {
-    const response = await fetch("http://engine.dollyassistant.com/search_intent", requestOptions);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    console.log('result', result);
-    return result;
-  } catch (error) {
-    console.error('Error:', error);
-    throw new Error('Failed to fetch intent');
-  }
-}
-
-async function functionCall(payloadd: object): Promise<string> {
-  
-  
-  const myHeaders = new Headers();
-  myHeaders.append("Content-Type", "application/json");
-  myHeaders.append("API-Key", "hT3vB6sJmZpQ8dR1nX9yA0wCf4lV7kW2");
-
-
-  const requestOptions: RequestInit = {
-    method: 'POST',
-    headers: myHeaders,
-    body: JSON.stringify(payloadd),
-    redirect: 'follow',
-    // mode: 'cors',
-  };
-
-
-
-  
-  try {
-    const response = await fetch("http://engine.dollyassistant.com/function_call", requestOptions);
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const result = await response.json();
-    console.log('result', result);
-    return result;
-  } catch (error) {
-    console.error('Error:', error);
-    throw new Error('Failed to fetch intent');
-  }
-}
-
-
-
+// Main chat component
 export default () => {
-  // Use hooks
 
-  const { messages, appendMsg, prependMsgs } = useMessages(initialMessages);
+  const { messages, appendMsg, setTyping, prependMsgs } = useMessages(initialMessages);
   const { quickReplies, replace } = useQuickReplies(defaultQuickReplies);
   const msgRef = React.useRef(null);
 
@@ -347,276 +135,239 @@ export default () => {
   window.appendMsg = appendMsg;
   window.msgRef = msgRef;
 
+  // Fetching intent data based on the user's input
+  async function fetchIntent(question: string): Promise<any> {
+    const myHeaders = new Headers();
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('API-Key', 'hT3vB6sJmZpQ8dR1nX9yA0wCf4lV7kW2');
 
- 
-// Send callback
-function handleSend(type: string, val: string) {
-  if (type === 'text' && val.trim()) {
+    const requestOptions: RequestInit = {
+      method: 'POST',
+      headers: myHeaders,
+      body: JSON.stringify({
+        store_id: 'local_store-2024',
+        categories: ['Dairy', 'Bakery', 'Produce'],
+        question,
+        conversation_id: 239,
+      }),
+      redirect: 'follow',
+    };
 
-    // TODO: Send request
-    appendMsg({
-      type: 'text',
-      content: { 
-        text: val,
-      },
-      position: 'right',
-      // user: { avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s' },
-       
-    });
-
-
-    fetchIntent(val)
-    .then(response => setTimeout(() => {
-    
-     
-
-      const functionIntent = response?.function_intent;
-
-       // convert response to parse json
-       console.log('response', functionIntent);
-
-       // switch case for function intent
-
-       if (functionIntent === 'direct_answer') {
-        appendMsg({
-          type: 'text',
-          content: { text: response?.answer },
-        });
+    try {
+      const response = await fetch('http://engine.dollyassistant.com/search_intent', requestOptions);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      else
-      {
-       
-        functionCall(response).then(functionCallData =>
-        {
+      return await response.json();
+    } catch (error) {
+      console.error('Error:', error);
+      throw new Error('Failed to fetch intent');
+    }
+  }
 
-        
-
-        console.log('functionCallData', functionCallData);
-
-        // check if functionCallData is not null
-
-        if (functionCallData) {
-          // appendMsg({
-          //   type: 'text',
-          //   content: { text: functionCallData },
-          // });
-        }
-        else {
-          appendMsg({
-            type: 'text',
-            content: { text: 'Sorry, this feature is not available right now' },
-          });
-        }
-        });
-
-
-        
-
-        
-
-      }
-
-      
-
-
-
-      
-
-
-      // linksList.length > 0 && appendMsg({
-      //   type: 'list',
-      //   content: { list: linksList },
-      // });
-    }, 1500))
-
-
-    
-    .catch(error => 
-       // Simulate reply message
-    setTimeout(() => {
+  // Send callback for sending messages
+  function handleSend(type: string, val: string) {
+    if (type === 'text' && val.trim()) {
+      // Append the user's message on the right side
       appendMsg({
         type: 'text',
-        content: { text: 'Error: Failed to fetch intent' }, // Error message
+        content: { text: val },
+        position: 'right',
+        user: {
+          avatar: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNL_ZnOTpXSvhf1UaK7beHey2BX42U6solRA&s',
+        },
       });
-    }, 1500)
-    );
-   
-  }
-}
 
-// Quick reply callback, different actions can be taken based on item data, here sending a text message as an example
-function handleQuickReplyClick(item: QuickReplyItemProps) {
-  handleSend('text', item.name);
+      setTimeout(() => {
+        setTyping(true);
+      }, 1000);
 
-  if (item.code === 'q1') {
-    replace([
-      {
-        name: 'Phrase A',
-        code: 'qa',
-        isHighlight: true,
-      },
-      {
-        name: 'Phrase B',
-        code: 'qb',
-      },
-    ]);
-  } else if (item.code === 'orderSelector') {
-    appendMsg({
-      type: 'order-selector',
-      content: {},
-      position: 'pop',
+      fetchIntent(val)
+        .then((response) => {
+          if (response && response.message) {
+            // Append each message from the response
+            response.message.forEach((msg: any) => {
+              appendMsg({
+                type: msg.type || 'text',
+                content: msg.content,
+                position: 'left',
+                user: {
+                  avatar: 'https://avatars.githubusercontent.com/u/33565557?v=4',
+                  name: 'Dolly Assistant',
+                },
+              });
+            });
+          }
+
+          // Update quick replies dynamically
+          if (response && response.quickReplies) {
+            const quickRepliesFromResponse = response.quickReplies.map((reply: any) => ({
+              icon: reply.icon,
+              name: reply.name,
+              code: reply.code,
+            }));
+            replace(quickRepliesFromResponse);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+          appendMsg({
+            type: 'text',
+            content: { text: 'Error: Failed to fetch intent' },
+            position: 'left',
+            user: {
+              avatar: 'https://avatars.githubusercontent.com/u/33565557?v=4',
+              name: 'Dolly Assistant',
+            },
+          });
+        })
+        .finally(() => {
+          // Hide typing indicator after processing the response
+          setTyping(false);
+        });
+    }
+  };
+
+  // Handle quick reply click
+  const handleQuickReplyClick = (item: QuickReplyItemProps) => {
+    handleSend('text', item.name);
+  };
+
+  function handleRefresh() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        const now = Date.now();
+
+        prependMsgs([
+          {
+            _id: now + '1111',
+            type: 'text',
+            content: { text: '11111Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '2222',
+            type: 'text',
+            content: { text: '22222 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '3333',
+            type: 'text',
+            content: { text: '333 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '4444',
+            type: 'text',
+            content: { text: '444 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '5555',
+            type: 'text',
+            content: { text: '555 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '6666',
+            type: 'text',
+            content: { text: '666 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+          {
+            _id: now + '7777',
+            type: 'text',
+            content: { text: '777 Hi，我是你的专属智能助理小蜜，有问题请随时找我哦~' },
+            user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
+          },
+        ]);
+        resolve({});
+      }, 800);
     });
   }
-}
 
-function handleRefresh() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const now = Date.now();
-
-      prependMsgs([
-        {
-          _id: now + '1111',
-          type: 'text',
-          content: { text: '11111 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-        {
-          _id: now + '2222',
-          type: 'text',
-          content: { text: '22222 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-        {
-          _id: now + '3333',
-          type: 'text',
-          content: { text: '333 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-        {
-          _id: now + '4444',
-          type: 'text',
-          content: { text: '444 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-        {
-          _id: now + '5555',
-          type: 'text',
-          content: { text: '555 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-        {
-          _id: now + '6666',
-          type: 'text',
-          content: { text: '666 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-        {
-          _id: now + '7777',
-          type: 'text',
-          content: { text: '777 Hi, I am your exclusive smart assistant Xiaomi, feel free to ask me anything~' },
-          user: { avatar: '//gw.alicdn.com/tfs/TB1DYHLwMHqK1RjSZFEXXcGMXXa-56-62.svg' },
-        },
-      ]);
-      resolve({});
-    }, 800);
-  });
-}
-
-function handleToolbarClick(item: ToolbarItemProps) {
-  if (item.type === 'orderSelector') {
-    appendMsg({
-      type: 'order-selector',
-      content: {},
-    });
+  function handleToolbarClick(item: ToolbarItemProps) {
+    if (item.type === 'orderSelector') {
+      appendMsg({
+        type: 'order-selector',
+        content: {},
+      });
+    }
   }
-}
 
-function renderMessageContent(msg: MessageProps) {
-  const { type, content } = msg;
+  // Render message content based on its type
+  function renderMessageContent(msg: MessageProps) {
+    const { type, content } = msg;
 
-  // Render based on message type
-  switch (type) {
-    case 'text':
-      return <Bubble content={content.text} />;
-    case 'guess-you':
-      return (
-        <Card fluid>
-          <Flex>
-            {/* <div className="guess-you-aside">
-              <h1>Guess what you want to ask</h1>
-            </div> */}
-            <FlexItem>
-              <List>
-                <ListItem content="Where is my red packet refund?" as="a" rightIcon="chevron-right" />
-                <ListItem content="Where is my red packet refund?" as="a" rightIcon="chevron-right" />
-                <ListItem content="How to modify review?" as="a" rightIcon="chevron-right" />
-                <ListItem content="Logistics inquiry" as="a" rightIcon="chevron-right" />
-              </List>
-            </FlexItem>
-          </Flex>
-        </Card>
-      );
-    case 'skill-cards':
-      return (
-        <ScrollView
-          className="skill-cards"
-          data={skillList}
-          fullWidth
-          renderItem={(item) => (
-            <Card>
-              <CardTitle>{item.title}</CardTitle>
-              <CardText>{item.desc}</CardText>
-            </Card>
-          )}
-        />
-      );
-    case 'order-selector':
-      return <OrderSelector />;
-    case 'image':
-      return (
-        <Bubble type="image">
-          <img src={content.picUrl} alt="" />
-        </Bubble>
-      );
-      case 'list':
-      return (
-        <Card fluid>
-          <Flex>
-            <FlexItem>
-              <List>
-                {
-                  content.list.map((item, index) => (
-                    <ListItem key={index} content={'🍓 '+item.name} />
-                  ))
-                }
-              </List>
-           </FlexItem>
-        </Flex>
-        </Card>
-      );
-    case 'image-text-button':
-      return (
-        <Flex>
+    switch (type) {
+      case 'text':
+        return <Bubble content={content.text} />;
+      case 'richtext':
+        return <div dangerouslySetInnerHTML={{ __html: content.html }} />;
+      case 'card':
+        return <Card content={content} />;
+      case 'guess-you':
+        return (
           <Card fluid>
-            <CardMedia image="//gw.alicdn.com/tfs/TB1Xv5_vlr0gK0jSZFnXXbRRXXa-427-240.png" />
-            <CardTitle>Card title</CardTitle>
-            <CardText>
-              If you want the seller to ship your order as soon as possible, you can go to [My Orders] to find the transaction,
-              click [Remind to Ship] or click [Contact Seller] to chat with the seller and ask them to ship your order as soon as possible. If the seller clearly states that they cannot ship, we recommend applying for a refund and selecting a higher quality product.
-            </CardText>
-            <CardActions>
-              <Button>Secondary Button</Button>
-              <Button color="primary">Primary Button</Button>
-            </CardActions>
+            <Flex>
+              <div className="guess-you-aside">
+                <h1>猜你想问</h1>
+              </div>
+              <FlexItem>
+                <List>
+                  <ListItem content="我的红包退款去哪里?" as="a" rightIcon="chevron-right" />
+                  <ListItem content="我的红包退款去哪里?" as="a" rightIcon="chevron-right" />
+                  <ListItem content="如何修改评价?" as="a" rightIcon="chevron-right" />
+                  <ListItem content="物流问题咨询" as="a" rightIcon="chevron-right" />
+                </List>
+              </FlexItem>
+            </Flex>
           </Card>
-          <RateActions onClick={console.log} />
-        </Flex>
-      );
-    default:
-      return null;
-  }
-}
+        );
+      case 'skill-cards':
+        return (
+          <ScrollView
+            className="skill-cards"
+            data={skillList}
+            fullWidth
+            renderItem={(item) => (
+              <Card>
+                <CardTitle>{item.title}</CardTitle>
+                <CardText>{item.desc}</CardText>
+              </Card>
+            )}
+          />
+        );
+      case 'order-selector':
+        return <OrderSelector />;
+      case 'image':
+        return (
+          <Bubble type="image">
+            <img src={content.picUrl} alt="" />
+          </Bubble>
+        );
+      case 'image-text-button':
+        return (
+          <Flex>
+            <Card fluid>
+              <CardMedia image="//gw.alicdn.com/tfs/TB1Xv5_vlr0gK0jSZFnXXbRRXXa-427-240.png" />
+              <CardTitle>Card title</CardTitle>
+              <CardText>
+                如您希望卖家尽快给您发货，可以进入【我的订单】找到该笔交易，点击【提醒发货】或点击【联系卖家】与卖家进行旺旺沟通尽快发货给您哦，若卖家明确表示无法发货，建议您申请退款重新选购更高品质的商品哦商品。申请退款重新选购更高品质的商品哦商品。
+              </CardText>
+              <CardActions>
+                <Button>次要按钮</Button>
+                <Button color="primary">主要按钮</Button>
+              </CardActions>
+            </Card>
+            <RateActions onClick={console.log} />
+          </Flex>
+        );
+      default:
+        return <Bubble content={`Unsupported message type: ${type}`} />;
+    }
+  };
 
 
   return (
@@ -627,29 +378,25 @@ function renderMessageContent(msg: MessageProps) {
         leftContent: {
           icon: 'chevron-left',
           title: 'Back',
-          onClick() {
-            navigate('/');
-          },
+          onClick: () => navigate('/'),
         },
         rightContent: [
           {
             icon: 'apps',
             title: 'Applications',
-            onClick() {
-              alert('Applications');
-            }
+            onClick: () => alert('Applications'),
           },
           {
-            icon: 'ellipsis-h', // ellipsis-h, compass, search, plus, smile, help, close
+            icon: 'ellipsis-h',
             title: 'More',
           },
         ],
         title: 'Punjabi Grocery Store',
         desc: 'Brampton, ON',
         logo: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1tmm0D7-XHCSC3QQJWi0oITTlueXiWeMcl1hwI5pr48_6Rv5_r2zx7SyXYCWcJzWQmkg&usqp=CAU',
-        align: 'left', // left, center, right
+        align: 'left',
       }}
-      rightAction={{ icon: 'compass' }} // right action button
+      rightAction={{ icon: 'compass' }}
       toolbar={toolbar}
       messagesRef={msgRef}
       onToolbarClick={handleToolbarClick}
@@ -661,6 +408,7 @@ function renderMessageContent(msg: MessageProps) {
       onQuickReplyClick={handleQuickReplyClick}
       onSend={handleSend}
       onImageSend={() => Promise.resolve()}
+
     />
   );
 };
